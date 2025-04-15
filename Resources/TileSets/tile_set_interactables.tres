@@ -1,0 +1,44 @@
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bkfoul3cwrtjb"]
+
+[ext_resource type="Texture2D" uid="uid://f0fhw7mn73o2" path="res://Assets/MiniWorldSprites/Miscellaneous/QuestBoard.png" id="1_8et1g"]
+[ext_resource type="Texture2D" uid="uid://dls8ipnyfy2df" path="res://Assets/MiniWorldSprites/Miscellaneous/Chests.png" id="2_txcd8"]
+[ext_resource type="Texture2D" uid="uid://dgmx8aqp8vx7y" path="res://Assets/MiniWorldSprites/Miscellaneous/Portal.png" id="3_kb32h"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jqea"]
+resource_name = "QuestBoards"
+texture = ExtResource("1_8et1g")
+0:0/0 = 0
+0:0/0/custom_data_0 = "Quest Board"
+1:0/0 = 0
+1:0/0/custom_data_0 = "Quest Board"
+2:0/0 = 0
+2:0/0/custom_data_0 = "Quest Board"
+3:0/0 = 0
+3:0/0/custom_data_0 = "Quest Board"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ifx0r"]
+resource_name = "Chests"
+texture = ExtResource("2_txcd8")
+0:0/0 = 0
+0:0/0/custom_data_0 = "Chest Common"
+1:0/0 = 0
+1:0/0/custom_data_0 = "Chest Rare"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dquyb"]
+resource_name = "Portals"
+texture = ExtResource("3_kb32h")
+0:0/0 = 0
+0:0/0/custom_data_0 = "Portal Cyan"
+1:0/0 = 0
+1:0/0/custom_data_0 = "Portal Lime"
+2:0/0 = 0
+2:0/0/custom_data_0 = "Portal Red"
+3:0/0 = 0
+3:0/0/custom_data_0 = "Portal Purple"
+
+[resource]
+custom_data_layer_0/name = "Interactable Identifier"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_5jqea")
+sources/1 = SubResource("TileSetAtlasSource_ifx0r")
+sources/2 = SubResource("TileSetAtlasSource_dquyb")

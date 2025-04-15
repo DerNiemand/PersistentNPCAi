@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="PersitentNpcAI"
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+run/max_fps=120
+config/icon="res://Assets/icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/extend_to_title=true
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
+
+[dotnet]
+
+project/assembly_name="PersitentNpcAiTests"
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Resources/": "pink",
+"res://Scenes/": "yellow",
+"res://Scenes/Menus/": "orange",
+"res://Scripts/": "teal"
+}
+
+[global_group]
+
+NavigationGeometry=""
+
+[layer_names]
+
+2d_navigation/layer_1="Default"
+2d_navigation/layer_2="Forest"
