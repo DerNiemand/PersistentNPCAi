@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=27 format=3 uid="uid://ws86h3bqow62"]
+[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://ws86h3bqow62"]
 
 [ext_resource type="Texture2D" uid="uid://cgnrwursmaklo" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleBarracks.png" id="1_jrk1v"]
 [ext_resource type="Texture2D" uid="uid://cqsb0teqwrr2g" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleChapels.png" id="2_1w6lk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4y5kplkmwa0q" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleWorkshops.png" id="4_s30bf"]
 [ext_resource type="Texture2D" uid="uid://b0k0g6b6jli7k" path="res://Assets/MiniWorldSprites/Nature/Wheatfield.png" id="5_1w6lk"]
 [ext_resource type="Texture2D" uid="uid://d3u0ikuc1ob55" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleDocks.png" id="5_6orb8"]
+[ext_resource type="Texture2D" uid="uid://604ecjfjuvgr" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleShip.png" id="6_f10uc"]
 [ext_resource type="Texture2D" uid="uid://3vbirky12ifh" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleHouses.png" id="6_l4yc0"]
 [ext_resource type="Texture2D" uid="uid://88vovrci1870" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleHuts.png" id="7_mfcqh"]
 [ext_resource type="Texture2D" uid="uid://cghwtok6mokp7" path="res://Assets/MiniWorldSprites/Buildings/Purple/PurpleKeep.png" id="8_jpr3w"]
@@ -114,6 +115,18 @@ texture = ExtResource("5_1w6lk")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s30bf"]
+texture = ExtResource("6_f10uc")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, -8)
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(-8, -8)
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(-8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eo3fc"]
 texture = ExtResource("5_6orb8")
@@ -318,6 +331,10 @@ texture = ExtResource("12_1r0s7")
 1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:5/0 = 0
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 1
@@ -334,3 +351,4 @@ sources/9 = SubResource("TileSetAtlasSource_u4ymh")
 sources/10 = SubResource("TileSetAtlasSource_x653l")
 sources/11 = SubResource("TileSetAtlasSource_ek1uc")
 sources/12 = SubResource("TileSetAtlasSource_f10uc")
+sources/13 = SubResource("TileSetAtlasSource_s30bf")

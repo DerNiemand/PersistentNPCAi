@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=27 format=3 uid="uid://cwtqp2sg4s04p"]
+[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://cwtqp2sg4s04p"]
 
 [ext_resource type="Texture2D" uid="uid://vbcy7sfxt1jc" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanBarracks.png" id="1_k7rma"]
 [ext_resource type="Texture2D" uid="uid://m6mm4um854kp" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanChapels.png" id="2_srdbx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://da4fabvsxtpab" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanWorkshops.png" id="4_g3yi1"]
 [ext_resource type="Texture2D" uid="uid://chlejpjymxypn" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanDocks.png" id="5_mu5tv"]
 [ext_resource type="Texture2D" uid="uid://b0k0g6b6jli7k" path="res://Assets/MiniWorldSprites/Nature/Wheatfield.png" id="5_srdbx"]
+[ext_resource type="Texture2D" uid="uid://brlwpssqs06ht" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanShip.png" id="6_inhws"]
 [ext_resource type="Texture2D" uid="uid://bq8w6f5bsbtbd" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanHouses.png" id="6_xgtxj"]
 [ext_resource type="Texture2D" uid="uid://8g5pjtam1o60" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanHuts.png" id="7_wmrv2"]
 [ext_resource type="Texture2D" uid="uid://bplpwpvgtocqd" path="res://Assets/MiniWorldSprites/Buildings/Cyan/CyanKeep.png" id="8_idn5g"]
@@ -114,6 +115,18 @@ texture = ExtResource("5_srdbx")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3yi1"]
+texture = ExtResource("6_inhws")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, -8)
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(-8, -8)
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(-8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eo3fc"]
 texture = ExtResource("5_mu5tv")
@@ -318,6 +331,10 @@ texture = ExtResource("12_t6lgl")
 1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:5/0 = 0
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 1
@@ -334,3 +351,4 @@ sources/9 = SubResource("TileSetAtlasSource_u4ymh")
 sources/10 = SubResource("TileSetAtlasSource_x653l")
 sources/11 = SubResource("TileSetAtlasSource_ek1uc")
 sources/12 = SubResource("TileSetAtlasSource_inhws")
+sources/13 = SubResource("TileSetAtlasSource_g3yi1")

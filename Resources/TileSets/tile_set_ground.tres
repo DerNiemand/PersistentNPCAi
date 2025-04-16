@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dirspphrgei4b"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dirspphrgei4b"]
 
 [ext_resource type="Texture2D" uid="uid://bb8xvlu2h1g8b" path="res://Assets/MiniWorldSprites/Ground/Cliff.png" id="1_vgqe2"]
 [ext_resource type="Texture2D" uid="uid://b84eyijtsa6fa" path="res://Assets/MiniWorldSprites/Ground/Grass.png" id="2_4fvmc"]
 [ext_resource type="Texture2D" uid="uid://dqurv4meovlku" path="res://Assets/MiniWorldSprites/Ground/TexturedGrass.png" id="3_426t6"]
+[ext_resource type="Texture2D" uid="uid://cp50jwi4iogoy" path="res://Assets/MiniWorldSprites/Ground/Shore.png" id="4_4fvmc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncx2v"]
 resource_name = "Cliffs"
@@ -288,6 +289,14 @@ texture = ExtResource("3_426t6")
 2:1/0 = 0
 2:1/0/probability = 0.5
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_426t6"]
+texture = ExtResource("4_4fvmc")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
 [resource]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 1
@@ -300,3 +309,4 @@ terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_ncx2v")
 sources/1 = SubResource("TileSetAtlasSource_smfce")
 sources/2 = SubResource("TileSetAtlasSource_7nkg8")
+sources/3 = SubResource("TileSetAtlasSource_426t6")
