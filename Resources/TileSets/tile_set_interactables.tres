@@ -8,13 +8,13 @@
 resource_name = "QuestBoards"
 texture = ExtResource("1_8et1g")
 0:0/0 = 0
-0:0/0/custom_data_0 = "Quest Board"
+0:0/0/custom_data_0 = "Quest Giver"
 1:0/0 = 0
-1:0/0/custom_data_0 = "Quest Board"
+1:0/0/custom_data_0 = "Quest Giver"
 2:0/0 = 0
-2:0/0/custom_data_0 = "Quest Board"
+2:0/0/custom_data_0 = "Quest Giver"
 3:0/0 = 0
-3:0/0/custom_data_0 = "Quest Board"
+3:0/0/custom_data_0 = "Quest Giver"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ifx0r"]
 resource_name = "Chests"
