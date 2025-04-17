@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://56ssw2w8mtwn"]
+
+[ext_resource type="Script" uid="uid://buqqkcxivvm5x" path="res://Scripts/NPCs/Quests/QuestManager.cs" id="1_1owtp"]
+[ext_resource type="Script" uid="uid://hh25s8as5m84" path="res://Scripts/NPCs/Quests/QuestGiver.cs" id="2_ej7dq"]
+
+[node name="QuestManager" type="Node" node_paths=PackedStringArray("questGiver") groups=["QuestManager"]]
+script = ExtResource("1_1owtp")
+questGiver = NodePath("QuestGiver")
+
+[node name="QuestGiver" type="Node" parent="." node_paths=PackedStringArray("questManager")]
+script = ExtResource("2_ej7dq")
+questManager = NodePath("..")

@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="PersitentNpcAI"
+run/main_scene="uid://d0soaavqokcc7"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-run/max_fps=120
+run/max_fps=20
 config/icon="res://Assets/icon.svg"
 
 [display]
@@ -40,8 +41,13 @@ folder_colors={
 [global_group]
 
 NavigationGeometry=""
+QuestManager=""
 
 [layer_names]
 
 2d_navigation/layer_1="Default"
 2d_navigation/layer_2="Forest"
+
+[navigation]
+
+3d/merge_rasterizer_cell_scale=0.001

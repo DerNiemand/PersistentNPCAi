@@ -3,3 +3,6 @@
 /android/
 .vscode/settings.json
 .vscode/persitentnpcaitests.code-workspace
+.vs/
+Properties/
+PersitentNpcAiTests.csproj.user
