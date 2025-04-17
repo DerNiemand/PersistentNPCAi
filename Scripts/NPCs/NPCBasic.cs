@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class NPCBasic : CharacterBody2D
+public partial class NPCBasic : CharacterBody2D, PersistentNPC
 {
 	[Export]
 	float maxVelocity;
@@ -14,8 +14,7 @@ public partial class NPCBasic : CharacterBody2D
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-		navAgent.TargetPosition = targetPosition;
-		
+		GetNewQuest();
 	}
 
 	public override void _Process(double delta)
@@ -34,7 +33,7 @@ public partial class NPCBasic : CharacterBody2D
 			Velocity = vectorToTarget;
 			MoveAndSlide();
 		}
-	    
+
 	}
 
 	public void OnSafeVelocityCalculated(Vector2 safeVelocity)
@@ -43,15 +42,15 @@ public partial class NPCBasic : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public void TargetReached()
-	{
-		GD.Print("Navigation finished");
-	}
-
 	public void NavigationFinished()
 	{
-		targetPosition.X = rng.RandfRange(0, maxCoordinates.X);
-		targetPosition.Y = rng.RandfRange(0, maxCoordinates.Y);
-		navAgent.TargetPosition = targetPosition;
+		GetNewQuest();
+	}
+
+	public void GetNewQuest()
+	{
+		var questManager = (QuestManager)GetTree().GetFirstNodeInGroup("QuestManager");
+		var quest = questManager.GetQuest(GlobalPosition);
+		navAgent.TargetPosition = quest.Location;
 	}
 }
