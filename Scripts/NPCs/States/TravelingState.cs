@@ -2,7 +2,7 @@ using System;
 
 public class TravelingState: NPCState
 {
-    NPCBasic npc;
+
 
     public override void Process(double delta)
     {

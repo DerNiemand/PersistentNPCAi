@@ -7,14 +7,21 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	float maxVelocity;
 	public float MaxVelocity
 	{
-		get { return maxVelocity; }
+		get => maxVelocity;
 	}
 
 	[Export]
 	Vector2 targetPosition;
 	[Export]
-	Vector2 maxCoordinates = new Vector2(3856, 3936);
+	Vector2 maxCoordinates = new(3856, 3936);
 	NavigationAgent2D navAgent;
+
+	[Export]
+	float range;
+	public float Range
+	{
+		get => range;
+	}
 
 	Area2D viewArea;
 	RayCast2D viewRay;
@@ -22,7 +29,17 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	{
 		get { return navAgent.AvoidanceEnabled; }
 	}
-	RandomNumberGenerator rng = new RandomNumberGenerator();
+	private Faction faction = Faction.Independent;
+
+	public Faction Faction
+	{
+		get => faction;
+		set { if (faction == Faction.Independent) { faction = value; } }
+	}
+
+	List<NPCBasic> npcsInView = new();
+	List<NPCBasic> enemeisInView = new();
+	RandomNumberGenerator rng = new();
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -68,6 +85,10 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		navAgent.TargetPosition = quest.Location;
 	}
 
+	public void SetNavAgentTarget(Vector2 targetPosition)
+	{
+		navAgent.TargetPosition = targetPosition;
+	}
 	public Vector2 GetNextNavPosition()
 	{
 		return navAgent.GetNextPathPosition();
@@ -80,19 +101,64 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public List<NPCBasic> GetAllNPCsInView()
 	{
 		List<NPCBasic> retVal = new();
-		foreach (var node in viewArea.GetOverlappingBodies())
+		foreach (var npc in npcsInView)
 		{
-			if (node is not NPCBasic)
-			{
-				break;
-			}
-			viewRay.TargetPosition = ToLocal(node.GlobalPosition);
+			viewRay.TargetPosition = ToLocal(npc.GlobalPosition);
 			if (!viewRay.IsColliding())
 			{
-				retVal.Add(node as NPCBasic);
+				retVal.Add(npc);
 			}
 		}
 
-		return retVal;
+		return npcsInView;
 	}
+
+	public void OnBodyEnterViewArea(Node2D other)
+	{
+		if (other is NPCBasic)
+		{
+			var otherNPC = other as NPCBasic;
+			npcsInView.Add(otherNPC);
+			if (FactionRelations.GetRelation(faction, otherNPC.faction) == Relation.Enemies)
+			{
+				enemeisInView.Add(otherNPC);
+			}
+		}
+	}
+
+	public void OnBodyExitViewArea(Node2D other)
+	{
+		if (other is NPCBasic)
+		{
+			if (npcsInView.Contains(other as NPCBasic))
+			{
+				npcsInView.Remove(other as NPCBasic);
+			}
+			if (enemeisInView.Contains(other as NPCBasic))
+			{
+				enemeisInView.Remove(other as NPCBasic);
+			}
+		}
+	}
+
+	public NPCBasic? GetNearestEnemy()
+	{
+		if (enemeisInView.Count != 0)
+		{
+			NPCBasic closestEnemy = new();
+			float closestEnemyDistanceSquared = float.MaxValue;
+			foreach (var enemy in enemeisInView)
+			{
+				var distanceSquaredToEnemy = GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition);
+				if (distanceSquaredToEnemy < closestEnemyDistanceSquared)
+				{
+					closestEnemy = enemy;
+					closestEnemyDistanceSquared = distanceSquaredToEnemy;
+				}
+			}
+			return closestEnemy;
+		}
+		return null;
+	}
+
 }

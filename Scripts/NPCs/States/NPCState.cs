@@ -1,6 +1,6 @@
 public class NPCState
 {
-    NPCBasic npc;
+    public NPCBasic npc;
 
     public void Init(NPCBasic npc)
     {
