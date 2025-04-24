@@ -5,14 +5,17 @@ using Godot;
 public class CombatState : NPCState
 {
     NPCBasic target;
-    public override void Process(double delta)
+    public override string Process(double delta)
     {
         target = npc.GetNearestEnemy();
-        if(target != null)
+        if (target != null)
         {
-            if(npc.GlobalPosition.DistanceTo(target.GlobalPosition) < npc.Range)
+            if (npc.GlobalPosition.DistanceTo(target.GlobalPosition) < npc.Range)
             {
-                Attack();
+                if (npc.CanAttack)
+                {
+                    Attack();
+                }
             }
             else
             {
@@ -22,7 +25,7 @@ public class CombatState : NPCState
 
                 vectorToTarget = vectorToTarget.Normalized() * npc.MaxVelocity;
 
-                if(npc.AvoidanceEnabled)
+                if (npc.AvoidanceEnabled)
                 {
                     npc.SetNavAgentVelocity(vectorToTarget);
                 }
@@ -33,10 +36,13 @@ public class CombatState : NPCState
                 }
             }
         }
+
+        return "";
     }
 
     private void Attack()
     {
         GD.Print("HYA");
+        npc.Attack(target.GlobalPosition - npc.GlobalPosition);
     }
 }

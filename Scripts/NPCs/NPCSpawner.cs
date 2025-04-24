@@ -20,12 +20,12 @@ public partial class NPCSpawner : Node2D
 		{
 			for(int i = 0; i < amount; i++)
 			{
-				Node2D newNPC = NPC.Instantiate() as Node2D;
+				NPCBasic newNPC = NPC.Instantiate() as NPCBasic;
 				var newPos = new Vector2(rng.RandfRange(0,spawnArea.Size.X), rng.RandfRange(0,spawnArea.Size.Y));
 				newPos += spawnArea.Position;
 
 				newNPC.Position = newPos;
-
+				newNPC.Faction = (Faction)rng.RandiRange(1,4);
 				AddChild(newNPC,true);
 			}
 		}
@@ -35,13 +35,13 @@ public partial class NPCSpawner : Node2D
 	{
 		if(!spawnAllAtStart && !(amount == amountSpawned))
 		{
-			Node2D newNPC = NPC.Instantiate() as Node2D;
+			NPCBasic newNPC = NPC.Instantiate() as NPCBasic;
 			var newPos = new Vector2(rng.RandfRange(0,spawnArea.Size.X), rng.RandfRange(0,spawnArea.Size.Y));
 			newPos += spawnArea.Position;
 			newNPC.Position = newPos;
+			newNPC.Faction = (Faction)rng.RandiRange(1,4);
 			AddChild(newNPC,true);
 			amountSpawned += 1;
-			GD.Print(amountSpawned);
 		}
 	}
 

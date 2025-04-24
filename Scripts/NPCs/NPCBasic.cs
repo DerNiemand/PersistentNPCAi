@@ -11,16 +11,22 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	}
 
 	[Export]
-	Vector2 targetPosition;
+	public Vector2 targetPosition;
 	[Export]
 	Vector2 maxCoordinates = new(3856, 3936);
 	NavigationAgent2D navAgent;
 
+
+	NPCState currentState;
+
 	[Export]
-	float range;
+	private Weapon weapon;
 	public float Range
 	{
-		get => range;
+		get => weapon.Range;
+	}
+	public bool CanAttack{
+		get => !weapon.AttackCoolingdown;
 	}
 
 	Area2D viewArea;
@@ -29,6 +35,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	{
 		get { return navAgent.AvoidanceEnabled; }
 	}
+	[Export]
 	private Faction faction = Faction.Independent;
 
 	public Faction Faction
@@ -38,33 +45,41 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	}
 
 	List<NPCBasic> npcsInView = new();
-	List<NPCBasic> enemeisInView = new();
+	List<NPCBasic> enemiesInView = new();
+	public bool EnemyIsInView
+	{
+		get
+		{
+			foreach (var enemy in enemiesInView)
+			{
+				viewRay.TargetPosition = ToLocal(enemy.GlobalPosition);
+				if (!viewRay.IsColliding())
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 	RandomNumberGenerator rng = new();
 	public override void _Ready()
 	{
 		navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		viewArea = GetNode<Area2D>("ViewArea");
 		viewRay = GetNode<RayCast2D>("ViewRay");
+		currentState = new TravelingState();
+		GetNode<AnimatedSprite2D>("Sprite2D").SpriteFrames = FactionStats.GetFactionSpriteFrames(faction);
+		currentState.Enter(this);
 		GetNewQuest();
 	}
 
 	public override void _Process(double delta)
 	{
-		var nextPos = navAgent.GetNextPathPosition();
-		var vectorToTarget = nextPos - GlobalPosition;
-
-		vectorToTarget = vectorToTarget.Normalized() * MaxVelocity;
-
-		if (navAgent.AvoidanceEnabled)
+		var nextState = currentState.Process(delta);
+		if (!string.IsNullOrEmpty(nextState))
 		{
-			SetNavAgentVelocity(vectorToTarget);
+			ChangeState(nextState);
 		}
-		else
-		{
-			Velocity = vectorToTarget;
-			MoveAndSlide();
-		}
-		GetAllNPCsInView();
 	}
 
 	public void OnSafeVelocityCalculated(Vector2 safeVelocity)
@@ -119,9 +134,9 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		{
 			var otherNPC = other as NPCBasic;
 			npcsInView.Add(otherNPC);
-			if (FactionRelations.GetRelation(faction, otherNPC.faction) == Relation.Enemies)
+			if (FactionStats.GetRelation(faction, otherNPC.faction) == Relation.Enemies)
 			{
-				enemeisInView.Add(otherNPC);
+				enemiesInView.Add(otherNPC);
 			}
 		}
 	}
@@ -134,20 +149,21 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 			{
 				npcsInView.Remove(other as NPCBasic);
 			}
-			if (enemeisInView.Contains(other as NPCBasic))
+			if (enemiesInView.Contains(other as NPCBasic))
 			{
-				enemeisInView.Remove(other as NPCBasic);
+				enemiesInView.Remove(other as NPCBasic);
 			}
 		}
 	}
 
+#nullable enable
 	public NPCBasic? GetNearestEnemy()
 	{
-		if (enemeisInView.Count != 0)
+		if (enemiesInView.Count != 0)
 		{
-			NPCBasic closestEnemy = new();
+			NPCBasic closestEnemy = enemiesInView[0];
 			float closestEnemyDistanceSquared = float.MaxValue;
-			foreach (var enemy in enemeisInView)
+			foreach (var enemy in enemiesInView)
 			{
 				var distanceSquaredToEnemy = GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition);
 				if (distanceSquaredToEnemy < closestEnemyDistanceSquared)
@@ -160,5 +176,30 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		}
 		return null;
 	}
+#nullable disable
 
+	private void ChangeState(string state)
+	{
+		switch (state)
+		{
+			case "traveling":
+				currentState.Exit();
+				currentState = new TravelingState();
+				currentState.Enter(this);
+				break;
+			case "combat":
+				currentState.Exit();
+				currentState = new CombatState();
+				currentState.Enter(this);
+				break;
+			default:
+				GD.Print("couldnt find spcified state to switch to");
+				break;
+		}
+	}
+
+	public void Attack(Vector2 direction)
+	{
+		weapon.Attack(direction);
+	}
 }

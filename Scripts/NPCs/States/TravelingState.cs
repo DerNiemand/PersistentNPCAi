@@ -2,9 +2,13 @@ using System;
 
 public class TravelingState: NPCState
 {
+	public override void Enter(NPCBasic npc)
+	{
+		base.Enter(npc);
+		npc.SetNavAgentTarget(npc.targetPosition);
+	}
 
-
-    public override void Process(double delta)
+    public override string Process(double delta)
     {
         var nextPos = npc.GetNextNavPosition();
 		var vectorToTarget = nextPos - npc.GlobalPosition;
@@ -20,6 +24,10 @@ public class TravelingState: NPCState
 			npc.Velocity = vectorToTarget;
 			npc.MoveAndSlide();
 		}
-		npc.GetAllNPCsInView();
+		if(npc.EnemyIsInView)
+		{
+			return "combat";
+		}
+		return "";
     }
 }

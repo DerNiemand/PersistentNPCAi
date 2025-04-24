@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Godot;
 
 public enum Faction
 {
@@ -17,9 +18,14 @@ public enum Relation
     Allies = 2
 }
 
-public static class FactionRelations
+public static class FactionStats
 {
-    static Dictionary<Faction,Dictionary<Faction,Relation>> factionRelationships = new()
+    static SpriteFrames independentFrames = GD.Load<SpriteFrames>("Resources/NPCs/npc_cyan.tres");
+    static SpriteFrames cyanFrames = GD.Load<SpriteFrames>("Resources/NPCs/npc_cyan.tres");
+    static SpriteFrames limeFrames = GD.Load<SpriteFrames>("Resources/NPCs/npc_lime.tres");
+    static SpriteFrames purpleFrames = GD.Load<SpriteFrames>("Resources/NPCs/npc_purple.tres");
+    static SpriteFrames redFrames = GD.Load<SpriteFrames>("Resources/NPCs/npc_red.tres");
+    static Dictionary<Faction, Dictionary<Faction, Relation>> factionRelationships = new()
     {
         {
             Faction.Independent, new()
@@ -55,7 +61,7 @@ public static class FactionRelations
         },
 
         {
-            Faction.Cyan, new()
+            Faction.Purple, new()
             {
                 {Faction.Independent, Relation.Neutral},
                 {Faction.Cyan, Relation.Allies},
@@ -80,6 +86,22 @@ public static class FactionRelations
     public static Relation GetRelation(Faction ownFaction, Faction encounteredFaction)
     {
         return factionRelationships[ownFaction][encounteredFaction];
+    }
+
+    public static SpriteFrames GetFactionSpriteFrames(Faction faction)
+    {
+        switch (faction){
+            case Faction.Cyan:
+                return cyanFrames;
+            case Faction.Lime:
+                return limeFrames;
+            case Faction.Purple:
+                return purpleFrames;
+            case Faction.Red:
+                return redFrames;
+            default:
+                return independentFrames;
+        }
     }
 
 }
