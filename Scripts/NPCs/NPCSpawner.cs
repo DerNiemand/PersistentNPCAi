@@ -12,35 +12,39 @@ public partial class NPCSpawner : Node2D
 	[Export]
 	Rect2 spawnArea;
 	[Export]
+	NavigationRegion2D navRegion;
+	[Export]
 	bool spawnAllAtStart;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if(spawnAllAtStart)
+		if (spawnAllAtStart)
 		{
-			for(int i = 0; i < amount; i++)
+			for (int i = 0; i < amount; i++)
 			{
 				NPCBasic newNPC = NPC.Instantiate() as NPCBasic;
-				var newPos = new Vector2(rng.RandfRange(0,spawnArea.Size.X), rng.RandfRange(0,spawnArea.Size.Y));
+				var newPos = new Vector2(rng.RandfRange(0, spawnArea.Size.X), rng.RandfRange(0, spawnArea.Size.Y));
+				newPos = NavigationServer2D.MapGetClosestPoint(navRegion.GetNavigationMap(), newPos);
 				newPos += spawnArea.Position;
 
 				newNPC.Position = newPos;
-				newNPC.Faction = (Faction)rng.RandiRange(1,4);
-				AddChild(newNPC,true);
+				newNPC.Faction = (Faction)rng.RandiRange(1, 4);
+				AddChild(newNPC, true);
 			}
 		}
 	}
 
 	public override void _Process(double delta)
 	{
-		if(!spawnAllAtStart && !(amount == amountSpawned))
+		if (!spawnAllAtStart && !(amount == amountSpawned))
 		{
 			NPCBasic newNPC = NPC.Instantiate() as NPCBasic;
-			var newPos = new Vector2(rng.RandfRange(0,spawnArea.Size.X), rng.RandfRange(0,spawnArea.Size.Y));
+			var newPos = new Vector2(rng.RandfRange(0, spawnArea.Size.X), rng.RandfRange(0, spawnArea.Size.Y));
+			newPos = NavigationServer2D.MapGetClosestPoint(navRegion.GetNavigationMap(), newPos);
 			newPos += spawnArea.Position;
 			newNPC.Position = newPos;
-			newNPC.Faction = (Faction)rng.RandiRange(1,4);
-			AddChild(newNPC,true);
+			newNPC.Faction = (Faction)rng.RandiRange(1, 4);
+			AddChild(newNPC, true);
 			amountSpawned += 1;
 		}
 	}

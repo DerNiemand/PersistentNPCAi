@@ -3,6 +3,12 @@ using System;
 
 public partial class Sword : Weapon
 {
+	[Signal]
+	public delegate void NPCHitEventHandler(NPCBasic hitNPC,int damage);
+
+	[Export]
+	int damage = 1;
+
 	AnimationPlayer AtackAnimPlayer;
 	public override void _Ready()
 	{
@@ -35,6 +41,14 @@ public partial class Sword : Weapon
 			}
 		}
 		GetNode<Timer>("AttackCooldown").Start(AttackCooldown);
+	}
+
+	public void OnBodyEnterDamageArea(Node2D other)
+	{
+		if(other is NPCBasic)
+		{
+			EmitSignal(SignalName.NPCHit,other as NPCBasic,damage);
+		}
 	}
 
 }

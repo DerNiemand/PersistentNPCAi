@@ -16,7 +16,6 @@ motion_mode = 1
 platform_floor_layers = 4294901760
 script = ExtResource("1_jcujo")
 maxVelocity = 50.0
-targetPosition = Vector2(16, 3916)
 weapon = NodePath("Sword")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -26,6 +25,7 @@ path_max_distance = 50.0
 navigation_layers = 3
 radius = 5.0
 neighbor_distance = 20.0
+debug_enabled = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -53,3 +53,4 @@ visible = false
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnSafeVelocityCalculated"]
 [connection signal="body_entered" from="ViewArea" to="." method="OnBodyEnterViewArea"]
 [connection signal="body_exited" from="ViewArea" to="." method="OnBodyExitViewArea"]
+[connection signal="NPCHit" from="Sword" to="." method="OnNPCHit"]

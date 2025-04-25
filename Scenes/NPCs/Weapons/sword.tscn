@@ -1,10 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb2cqg5wxepud"]
+[gd_scene load_steps=9 format=3 uid="uid://bb2cqg5wxepud"]
 
 [ext_resource type="Script" uid="uid://j0mj4pa7duwi" path="res://Scripts/NPCs/Weapons/Sword.cs" id="1_tb2h8"]
 [ext_resource type="Texture2D" uid="uid://7yi0josd263u" path="res://Assets/FantasySwords16X16Pack1.0/Sword-Pack-1.png" id="2_lkibv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtndr"]
-size = Vector2(8, 8)
 
 [sub_resource type="Animation" id="Animation_mihjh"]
 length = 0.001
@@ -230,12 +227,14 @@ region_rect = Rect2(0, 0, 16, 16)
 region_filter_clip_enabled = true
 
 [node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitArea"]
 position = Vector2(7.25, -7.25)
-shape = SubResource("RectangleShape2D_gtndr")
+polygon = PackedVector2Array(3.99916, -4.00295, 3.99916, -1.28554, -2.34158, 4.02133, -7.25, 7.25, -3.98438, 2.24219, 1.31555, -3.99921)
 
 [node name="AttackAnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
@@ -245,3 +244,5 @@ libraries = {
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="body_entered" from="HitArea" to="." method="OnBodyEnterDamageArea"]

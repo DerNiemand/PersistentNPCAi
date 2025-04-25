@@ -35,14 +35,13 @@ public class CombatState : NPCState
                     npc.MoveAndSlide();
                 }
             }
+            return "";
         }
-
-        return "";
+        return "traveling";
     }
 
     private void Attack()
     {
-        GD.Print("HYA");
         npc.Attack(target.GlobalPosition - npc.GlobalPosition);
     }
 }

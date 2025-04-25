@@ -3,6 +3,14 @@ using Godot;
 
 public partial class NPCBasic : CharacterBody2D, PersistentNPC
 {
+	[Export, ExportCategory("Stats")]
+	int maxHealth = 5;
+	int health;
+	public int Health
+	{
+		get => health;
+	}
+
 	[Export]
 	float maxVelocity;
 	public float MaxVelocity
@@ -10,10 +18,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		get => maxVelocity;
 	}
 
-	[Export]
 	public Vector2 targetPosition;
-	[Export]
-	Vector2 maxCoordinates = new(3856, 3936);
 	NavigationAgent2D navAgent;
 
 
@@ -25,7 +30,8 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	{
 		get => weapon.Range;
 	}
-	public bool CanAttack{
+	public bool CanAttack
+	{
 		get => !weapon.AttackCoolingdown;
 	}
 
@@ -69,8 +75,9 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		viewRay = GetNode<RayCast2D>("ViewRay");
 		currentState = new TravelingState();
 		GetNode<AnimatedSprite2D>("Sprite2D").SpriteFrames = FactionStats.GetFactionSpriteFrames(faction);
-		currentState.Enter(this);
 		GetNewQuest();
+		currentState.Enter(this);
+		health = maxHealth;
 	}
 
 	public override void _Process(double delta)
@@ -97,7 +104,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	{
 		var questManager = (QuestManager)GetTree().GetFirstNodeInGroup("QuestManager");
 		var quest = questManager.GetQuest(GlobalPosition);
-		navAgent.TargetPosition = quest.Location;
+		targetPosition = quest.Location;
 	}
 
 	public void SetNavAgentTarget(Vector2 targetPosition)
@@ -201,5 +208,23 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public void Attack(Vector2 direction)
 	{
 		weapon.Attack(direction);
+	}
+
+	public void GetHitByNPC(int damage, Faction hittingFaction)
+	{
+		if (FactionStats.GetRelation(faction, hittingFaction) == Relation.Enemies)
+		{
+			health -= damage;
+			if (health <= 0)
+			{
+				Position = new(-1000, -1000);
+				QueueFree();
+			}
+		}
+	}
+
+	public void OnNPCHit(NPCBasic hitNPC,int damage)
+	{
+		hitNPC.GetHitByNPC(damage,faction);
 	}
 }

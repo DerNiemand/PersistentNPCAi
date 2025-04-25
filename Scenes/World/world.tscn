@@ -268,12 +268,12 @@ tile_set = ExtResource("4_y0d6x")
 tile_map_data = PackedByteArray("AABEACkAAAADAAAAAADJACwAAAACAAAAAADgAI8AAAABAAAAAAC7AOgAAAADAAAAAAABAPQAAAABAAAAAAA=")
 tile_set = ExtResource("7_y0d6x")
 
-[node name="NPCs" type="Node2D" parent="."]
+[node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]
 script = ExtResource("9_ugf0j")
 NPC = ExtResource("10_0ph6x")
 amount = 1000
 spawnArea = Rect2(3, 3, 3850, 3930)
-spawnAllAtStart = true
+navRegion = NodePath("../NavMeshes/Area0-0")
 
 [node name="NPCBasic" parent="NPCs" instance=ExtResource("10_0ph6x")]
 position = Vector2(2444.54, 2571.93)
