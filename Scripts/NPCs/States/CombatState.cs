@@ -23,8 +23,8 @@ public class CombatState : NPCState
                 var nextPos = npc.GetNextNavPosition();
                 var vectorToTarget = nextPos - npc.GlobalPosition;
 
-                vectorToTarget = vectorToTarget.Normalized() * npc.MaxVelocity;
-
+                vectorToTarget = npc.MaxVelocity * (float)delta * vectorToTarget.Normalized();
+                
                 if (npc.AvoidanceEnabled)
                 {
                     npc.SetNavAgentVelocity(vectorToTarget);

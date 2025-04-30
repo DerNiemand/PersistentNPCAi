@@ -4,7 +4,7 @@ using System;
 public partial class Sword : Weapon
 {
 	[Signal]
-	public delegate void NPCHitEventHandler(NPCBasic hitNPC,int damage);
+	public delegate void NPCHitEventHandler(NPCBasic hitNPC, int damage);
 
 	[Export]
 	int damage = 1;
@@ -45,10 +45,21 @@ public partial class Sword : Weapon
 
 	public void OnBodyEnterDamageArea(Node2D other)
 	{
-		if(other is NPCBasic)
+		if (other is NPCBasic)
 		{
-			EmitSignal(SignalName.NPCHit,other as NPCBasic,damage);
+			EmitSignal(SignalName.NPCHit, other as NPCBasic, damage);
 		}
 	}
+
+	public override void EnableVisuals()
+	{
+		GetNode<Sprite2D>("Sprite2D").Visible = true;
+	}
+    public override void DisableVisuals()
+    {
+		GetNode<Sprite2D>("Sprite2D").Visible = false;
+    }
+
+
 
 }

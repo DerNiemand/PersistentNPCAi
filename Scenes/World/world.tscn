@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://d0soaavqokcc7"]
+[gd_scene load_steps=24 format=4 uid="uid://d0soaavqokcc7"]
 
 [ext_resource type="TileSet" uid="uid://dirspphrgei4b" path="res://Resources/TileSets/tile_set_ground.tres" id="1_adcqc"]
 [ext_resource type="TileSet" uid="uid://cwtqp2sg4s04p" path="res://Resources/TileSets/Buildings/tile_set_buildings_cyan.tres" id="2_7staa"]
@@ -8,9 +8,10 @@
 [ext_resource type="TileSet" uid="uid://xt7ewq34nrfd" path="res://Resources/TileSets/Buildings/tile_set_buildings_red.tres" id="5_fcotr"]
 [ext_resource type="TileSet" uid="uid://bkfoul3cwrtjb" path="res://Resources/TileSets/tile_set_interactables.tres" id="7_y0d6x"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_ugf0j"]
-[ext_resource type="PackedScene" uid="uid://ddlx4wkqjmssm" path="res://Scenes/NPCs/npc_basic.tscn" id="10_0ph6x"]
+[ext_resource type="PackedScene" uid="uid://dtv7wgpljnjo3" path="res://Scenes/NPCs/Implementations/decrease_update_rate.tscn" id="10_pvt60"]
 [ext_resource type="PackedScene" uid="uid://56ssw2w8mtwn" path="res://Scenes/NPCs/quest_manager.tscn" id="10_ugf0j"]
 [ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_0ph6x"]
+[ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="12_pvt60"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_63187"]
 vertices = PackedVector2Array(1189, 741, 1243, 757, 1259, 763, 1147, 763, 1061, 757, 1163, 741, 1269, 635, 1227, 635, 1077, 629, 1077, 603, 1195, 635, 1195, 651, 1179, 651, 1013, 645, 1035, 629, 1323, 731, 1307, 731, 1221, 725, 1243, 725, 1301, 619, 1275, 619, 981, 565, 987, 565, 1301, 645, 1301, 683, 1275, 683, 1269, 677, 1275, 645, 1269, 699, 1243, 699, 1237, 693, 1243, 677, 1323, 533, 1301, 565, 1013, 683, 987, 683, 997, 677, 1019, 667, 1349, 789, 1920, 1080, 5, 1080, 1147, 789, 1189, 709, 1189, 683, 1195, 699, 1195, 725, 971, 677, 981, 683, 1301, 539, 1157, 533, 1259, 539, 1920, 5, 1349, 507, 547, 304.391, 547, 222.672, 841.828, 436.352, 832.359, 435, 849, 539.5, 849, 446.398, 923, 507, 923, 789, 841.672, 545, 1243, 731, 1061, 725, 1061, 699, 1163, 715, 1259, 565, 1253, 565, 1253, 539, 1227, 539, 1045, 603, 1045, 587, 1019, 587, 1019, 613, 1013, 619, 997, 613, 997, 587, 1035, 613, 1227, 661, 1221, 661, 1221, 635, 987, 619, 971, 613, 1275, 725, 1269, 725, 1307, 757, 1323, 757, 1323, 763, 1285, 763, 1285, 747, 1269, 747, 1269, 731, 1045, 699, 1045, 677, 1061, 677, 1035, 651, 1035, 667, 997, 651, 1019, 709, 1035, 709, 1035, 725, 1013, 709, 1019, 731, 997, 725, 987, 699, 981, 699, 955, 683, 955, 709, 971, 709, 971, 715, 955, 715, 1019, 757, 981, 741, 981, 725, 997, 709, 1259, 757, 1061, 731, 527.391, 223, 527.719, 223.078, 528, 224.477, 528, 285, 336, 285, 419.906, 223, 336, 192.477, 416, 215.18, 411, 189.898, 415.719, 191.078, 416, 192.477, 336.273, 191.078, 341, 189.898, 411, 178.477, 341, 178.477, 1163, 709, 1189, 715, 1163, 683, 1061, 651, 1237, 667, 1243, 661, 1211, 667, 1205, 661, 1205, 677, 1211, 693, 1301, 725, 550.328, 545, 528.25, 211, 435.461, 211, 435, 209.758, 435, 190.672, 751.531, 443, 748.531, 451, 671.641, 451, 655.531, 459, 652.531, 467, 559.641, 467, 987, 645, 971, 651, 1179, 677, 1221, 699, 949, 533, 955, 565, 541.063, 212.281, 5, 5, 429.063, 180.281, 758.172, 436.352, 753.422, 443, 662.172, 452.352, 657.422, 459, 1227, 565, 1221, 565, 1221, 539, 1179, 539, 1157, 565, 1179, 565, 322.938, 180.281, 317, 190.672, 317, 304.391, 326.039, 308, 537.961, 308, 550.172, 468.352, 543, 478.398, 767.641, 435, 543, 539.5, 955, 741, 949, 763, 1115, 565, 1109, 565, 1115, 533, 1109, 539, 1083, 539, 1125, 789, 1125, 763, 971, 587, 1083, 565, 1061, 565, 1061, 539, 1035, 539, 1035, 565, 1029, 565, 1029, 539, 987, 539, 981, 539, 955, 539)
@@ -270,18 +271,18 @@ tile_set = ExtResource("7_y0d6x")
 
 [node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]
 script = ExtResource("9_ugf0j")
-NPC = ExtResource("10_0ph6x")
+NPC = ExtResource("10_pvt60")
 amount = 1000
 spawnArea = Rect2(3, 3, 3850, 3930)
 navRegion = NodePath("../NavMeshes/Area0-0")
 
-[node name="NPCBasic" parent="NPCs" instance=ExtResource("10_0ph6x")]
-position = Vector2(2444.54, 2571.93)
-faction = 1
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1920, 1968)
+enabled = false
 zoom = Vector2(0.245, 0.245)
 
 [node name="DebugMethods" type="Node" parent="."]
 script = ExtResource("11_0ph6x")
+
+[node name="Player" parent="." instance=ExtResource("12_pvt60")]
+speed = 100.0

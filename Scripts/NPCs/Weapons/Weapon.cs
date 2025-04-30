@@ -22,4 +22,13 @@ public partial class Weapon : Node2D
     }
 
     public virtual void Attack(Vector2 direction) { }
+
+    public virtual void DisableVisuals()
+    {
+        Visible = false;
+    }
+    public virtual void EnableVisuals()
+    {
+        Visible = true;
+    }
 }

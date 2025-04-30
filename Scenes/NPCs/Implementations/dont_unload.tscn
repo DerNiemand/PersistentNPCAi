@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddlx4wkqjmssm"]
+[gd_scene load_steps=6 format=3 uid="uid://b71w0kk3ii553"]
 
-[ext_resource type="Script" uid="uid://c4fveo6vouk3s" path="res://Scripts/NPCs/NPCBasic.cs" id="1_jcujo"]
-[ext_resource type="SpriteFrames" uid="uid://cua130x2xgbbm" path="res://Resources/NPCs/npc_independent.tres" id="2_gtndr"]
-[ext_resource type="PackedScene" uid="uid://bb2cqg5wxepud" path="res://Scenes/NPCs/Weapons/sword.tscn" id="3_gtndr"]
+[ext_resource type="Script" uid="uid://ca47vmi0mm5o8" path="res://Scripts/NPCs/Implementations/DontUnload.cs" id="1_o6hxd"]
+[ext_resource type="SpriteFrames" uid="uid://cua130x2xgbbm" path="res://Resources/NPCs/npc_independent.tres" id="2_qum8o"]
+[ext_resource type="PackedScene" uid="uid://bb2cqg5wxepud" path="res://Scenes/NPCs/Weapons/sword.tscn" id="3_1pgoh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63187"]
 size = Vector2(6.41406, 6.42059)
@@ -10,11 +10,11 @@ size = Vector2(6.41406, 6.42059)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jcujo"]
 radius = 50.0
 
-[node name="NPCBasic" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
+[node name="DontUnload" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
 collision_layer = 2
 motion_mode = 1
 platform_floor_layers = 4294901760
-script = ExtResource("1_jcujo")
+script = ExtResource("1_o6hxd")
 maxVelocity = 500.0
 weapon = NodePath("Sword")
 
@@ -29,7 +29,7 @@ debug_enabled = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("2_gtndr")
+sprite_frames = ExtResource("2_qum8o")
 animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -45,8 +45,11 @@ debug_color = Color(0.930934, 0.229629, 0.333827, 0.42)
 
 [node name="ViewRay" type="RayCast2D" parent="."]
 
-[node name="Sword" parent="." instance=ExtResource("3_gtndr")]
+[node name="Sword" parent="." instance=ExtResource("3_1pgoh")]
 visible = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-50, -50, 100, 100)
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="NavigationFinished"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="TargetReached"]
@@ -54,3 +57,5 @@ visible = false
 [connection signal="body_entered" from="ViewArea" to="." method="OnBodyEnterViewArea"]
 [connection signal="body_exited" from="ViewArea" to="." method="OnBodyExitViewArea"]
 [connection signal="NPCHit" from="Sword" to="." method="OnNPCHit"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="DisableOfflineBehaviour"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="EnableOfflineBehaviour"]

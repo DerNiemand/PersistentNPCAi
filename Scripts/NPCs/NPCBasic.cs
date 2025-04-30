@@ -20,7 +20,20 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 
 	public Vector2 targetPosition;
 	NavigationAgent2D navAgent;
-
+	public Vector2 navTargetPosition;
+	public Vector2 NavTargetPosition
+	{
+		get
+		{
+			if (navTargetPositionDirty)
+			{
+				navTargetPosition = navAgent.GetFinalPosition();
+				navTargetPositionDirty = false;
+			}
+			return navTargetPosition;
+		}
+	}
+	private bool navTargetPositionDirty = true;
 
 	NPCState currentState;
 
@@ -118,6 +131,10 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public void SetNavAgentVelocity(Vector2 velocity)
 	{
 		navAgent.SetVelocity(velocity);
+	}
+	public void OnNavigationAgentPathChanged()
+	{
+		navTargetPositionDirty = true;
 	}
 
 	public List<NPCBasic> GetAllNPCsInView()
@@ -223,8 +240,8 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 		}
 	}
 
-	public void OnNPCHit(NPCBasic hitNPC,int damage)
+	public void OnNPCHit(NPCBasic hitNPC, int damage)
 	{
-		hitNPC.GetHitByNPC(damage,faction);
+		hitNPC.GetHitByNPC(damage, faction);
 	}
 }

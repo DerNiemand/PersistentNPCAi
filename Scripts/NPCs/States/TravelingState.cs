@@ -1,4 +1,3 @@
-using System;
 
 public class TravelingState: NPCState
 {
@@ -13,7 +12,8 @@ public class TravelingState: NPCState
         var nextPos = npc.GetNextNavPosition();
 		var vectorToTarget = nextPos - npc.GlobalPosition;
 
-		vectorToTarget = vectorToTarget.Normalized() * npc.MaxVelocity;
+		vectorToTarget = npc.MaxVelocity * (float)delta * vectorToTarget.Normalized();
+		
 
 		if(npc.AvoidanceEnabled)
 		{
