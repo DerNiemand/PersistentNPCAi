@@ -266,7 +266,7 @@ tile_map_data = PackedByteArray("AACQAB0AAAADAAAAAACQAB4AAAADAAAAAACQACAAAAACAAA
 tile_set = ExtResource("4_y0d6x")
 
 [node name="PointsOfInterest" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AABEACkAAAADAAAAAADJACwAAAACAAAAAADgAI8AAAABAAAAAAC7AOgAAAADAAAAAAABAPQAAAABAAAAAAA=")
+tile_map_data = PackedByteArray("AABEACkAAAABAAAAAADJACwAAAABAAAAAADgAI8AAAADAAAAAAC7AOgAAAACAAAAAAABAPQAAAAAAAAAAAA=")
 tile_set = ExtResource("7_y0d6x")
 
 [node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]

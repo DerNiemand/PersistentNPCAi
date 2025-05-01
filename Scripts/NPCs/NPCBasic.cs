@@ -116,7 +116,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public void GetNewQuest()
 	{
 		var questManager = (QuestManager)GetTree().GetFirstNodeInGroup("QuestManager");
-		var quest = questManager.GetQuest(GlobalPosition);
+		var quest = questManager.GetQuest(faction, GlobalPosition);
 		targetPosition = quest.Location;
 	}
 

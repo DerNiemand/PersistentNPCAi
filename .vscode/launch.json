@@ -1,12 +1,23 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Play",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "c:/Program Files (x86)/Godot/4.4-.NET/Godot_v4.4-stable_mono_win64.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+        }, 
+        {
+            "name": "PlayHome",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "C:/Program Files (x86)/Godot Engine/v4.4.1-.NET/Godot_v4.4.1-stable_mono_win64.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

@@ -9,12 +9,16 @@ resource_name = "QuestBoards"
 texture = ExtResource("1_8et1g")
 0:0/0 = 0
 0:0/0/custom_data_0 = "Quest Giver"
+0:0/0/custom_data_1 = 1
 1:0/0 = 0
 1:0/0/custom_data_0 = "Quest Giver"
+1:0/0/custom_data_1 = 2
 2:0/0 = 0
 2:0/0/custom_data_0 = "Quest Giver"
+2:0/0/custom_data_1 = 3
 3:0/0 = 0
 3:0/0/custom_data_0 = "Quest Giver"
+3:0/0/custom_data_1 = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ifx0r"]
 resource_name = "Chests"
@@ -39,6 +43,8 @@ texture = ExtResource("3_kb32h")
 [resource]
 custom_data_layer_0/name = "Interactable Identifier"
 custom_data_layer_0/type = 4
+custom_data_layer_1/name = "Faction"
+custom_data_layer_1/type = 2
 sources/0 = SubResource("TileSetAtlasSource_5jqea")
 sources/1 = SubResource("TileSetAtlasSource_ifx0r")
 sources/2 = SubResource("TileSetAtlasSource_dquyb")
