@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0khcb1qgly1q"]
+
+[ext_resource type="Script" uid="uid://kow8a40uvkb7" path="res://Scripts/NPCs/TurnBasedNpcManager.cs" id="1_rve7v"]
+
+[node name="TurnBasedNPCManager" type="Node2D" node_paths=PackedStringArray("UpdateTimer")]
+script = ExtResource("1_rve7v")
+UpdateTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
