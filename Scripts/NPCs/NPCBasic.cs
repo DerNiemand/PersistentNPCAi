@@ -111,6 +111,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public void NavigationFinished()
 	{
 		GetNewQuest();
+		SetNavAgentTarget(targetPosition);
 	}
 
 	public void GetNewQuest()

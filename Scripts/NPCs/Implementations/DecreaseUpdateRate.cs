@@ -8,7 +8,7 @@ public partial class DecreaseUpdateRate : OutOfViewBahviour
     [Export]
     double offlineTickTime = 2.0;
 
-    private float pathDesiredDistanceOriginal;
+    private float pathDesiredDistanceOriginal = 5.0f;
     public override void DisableOfflineBehaviour()
     {
         SetProcess(true);
