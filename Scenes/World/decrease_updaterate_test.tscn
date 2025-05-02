@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckl4y6lhvy5lv"]
+
+[ext_resource type="PackedScene" uid="uid://56ssw2w8mtwn" path="res://Scenes/NPCs/quest_manager.tscn" id="1_f4xiv"]
+[ext_resource type="PackedScene" uid="uid://d0soaavqokcc7" path="res://Scenes/World/world.tscn" id="2_j3gdt"]
+[ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_u4e3o"]
+[ext_resource type="PackedScene" uid="uid://dtv7wgpljnjo3" path="res://Scenes/NPCs/Implementations/decrease_update_rate.tscn" id="10_lxhsb"]
+[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_inohj"]
+[ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="12_4obni"]
+
+[node name="DecreaseUpdateRateTest" type="Node2D"]
+
+[node name="QuestManager" parent="." node_paths=PackedStringArray("pointsOfInterestLayer") instance=ExtResource("1_f4xiv")]
+pointsOfInterestLayer = NodePath("../World/PointsOfInterest")
+
+[node name="World" parent="." instance=ExtResource("2_j3gdt")]
+
+[node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]
+script = ExtResource("9_u4e3o")
+NPC = ExtResource("10_lxhsb")
+amount = 1000
+spawnArea = Rect2(3, 3, 3850, 3930)
+navRegion = NodePath("../World/NavMeshes/Area0-0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1920, 1968)
+enabled = false
+zoom = Vector2(0.245, 0.245)
+
+[node name="DebugMethods" type="Node" parent="."]
+script = ExtResource("11_inohj")
+
+[node name="Player" parent="." instance=ExtResource("12_4obni")]
+speed = 100.0
