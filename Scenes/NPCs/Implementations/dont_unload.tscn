@@ -46,7 +46,6 @@ debug_color = Color(0.930934, 0.229629, 0.333827, 0.42)
 [node name="ViewRay" type="RayCast2D" parent="."]
 
 [node name="Sword" parent="." instance=ExtResource("3_1pgoh")]
-visible = false
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-50, -50, 100, 100)

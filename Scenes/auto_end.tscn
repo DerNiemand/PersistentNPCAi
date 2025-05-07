@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cat6wixawiosj"]
+
+[ext_resource type="Script" uid="uid://dubem8p67ci3f" path="res://Scripts/AutoEnd.cs" id="1_qiqb4"]
+
+[node name="AutoEnd" type="Timer"]
+script = ExtResource("1_qiqb4")
+
+[connection signal="timeout" from="." to="." method="OnTimeOut"]

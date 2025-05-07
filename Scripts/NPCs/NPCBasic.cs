@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.Marshalling;
 using Godot;
 
 public partial class NPCBasic : CharacterBody2D, PersistentNPC
@@ -235,8 +236,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 			health -= damage;
 			if (health <= 0)
 			{
-				Position = new(-1000, -1000);
-				QueueFree();
+				Die();
 			}
 		}
 	}
@@ -244,5 +244,11 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	public void OnNPCHit(NPCBasic hitNPC, int damage)
 	{
 		hitNPC.GetHitByNPC(damage, faction);
+	}
+
+	public virtual void Die()
+	{
+		Position = new(-1000, -1000);
+		QueueFree();
 	}
 }

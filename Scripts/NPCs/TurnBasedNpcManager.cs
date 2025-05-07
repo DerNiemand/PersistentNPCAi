@@ -48,7 +48,7 @@ public partial class TurnBasedNpcManager : Node2D
 		if (offlineNPCs.Contains(npc))
 		{
 			var removeIndex = offlineNPCs.IndexOf(npc);
-			if (deletionIndecies.Contains(removeIndex))
+			if (!deletionIndecies.Contains(removeIndex))
 			{
 				deletionIndecies.Add(removeIndex);
 			}
@@ -60,18 +60,31 @@ public partial class TurnBasedNpcManager : Node2D
 		double timeSinceLastUpdate = 0;
 		if (deletionIndecies.Contains(currentIndex))
 		{
-			frameTimes[currentIndex + 1] = delta;
+			var updatedIndex = currentIndex + 1 > offlineNPCs.Count - 1 ? 0 : currentIndex + 1;
+			int skippedIndecies = 1;
+			while (deletionIndecies.Contains(updatedIndex))
+			{
+				skippedIndecies++;
+				updatedIndex = updatedIndex + 1 > offlineNPCs.Count - 1 ? 0 : updatedIndex + 1;
+			}
+
+			frameTimes[updatedIndex] = delta;
 			foreach (var time in frameTimes)
 			{
 				timeSinceLastUpdate += time;
 			}
-			offlineNPCs.RemoveAt(currentIndex);
-			frameTimes.RemoveAt(currentIndex);
-			deletionIndecies.Remove(currentIndex);
+
+			for(int i = 0; i < skippedIndecies;i++){
+				offlineNPCs.RemoveAt(currentIndex + i);
+				frameTimes.RemoveAt(currentIndex + i);
+				deletionIndecies.Remove(currentIndex + i);
+			}
+
 			for (int i = 0; i < deletionIndecies.Count; i++)
 			{
-				deletionIndecies[i] = deletionIndecies[i] > currentIndex ? deletionIndecies[i] - 1 : deletionIndecies[i];
+				deletionIndecies[i] = deletionIndecies[i] > currentIndex ? deletionIndecies[i] - skippedIndecies : deletionIndecies[i];
 			}
+			currentIndex = currentIndex >= offlineNPCs.Count - 1 ? 0 : currentIndex;
 		}
 		else
 		{
@@ -82,7 +95,12 @@ public partial class TurnBasedNpcManager : Node2D
 			}
 		}
 		offlineNPCs[currentIndex]._Process(timeSinceLastUpdate);
-		currentIndex++;
+		currentIndex = currentIndex >= offlineNPCs.Count - 1 ? 0 : currentIndex + 1;
+	}
+
+	public void OnUpdateTimerTimeout()
+	{
+		UpdateNPC(updateTime);
 	}
 
 }

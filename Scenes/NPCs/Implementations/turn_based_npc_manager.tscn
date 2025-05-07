@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://kow8a40uvkb7" path="res://Scripts/NPCs/TurnBasedNpcManager.cs" id="1_rve7v"]
 
-[node name="TurnBasedNPCManager" type="Node2D" node_paths=PackedStringArray("UpdateTimer")]
+[node name="TurnBasedNPCManager" type="Node2D" node_paths=PackedStringArray("UpdateTimer") groups=["TurnBasedNPCManager"]]
 script = ExtResource("1_rve7v")
+updateTime = 0.0
 UpdateTimer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="OnUpdateTimerTimeout"]

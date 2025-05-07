@@ -3,11 +3,20 @@ using Godot;
 public partial class TurnBased : OutOfViewBahviour
 {
 	[Signal]
-	public delegate void OfllineBehaviourEnabledEventHandler(TurnBased npc);
+	public delegate void OfflineBehaviourEnabledEventHandler(TurnBased npc);
 	[Signal]
-	public delegate void OfllineBehaviourDisabledEventHandler(TurnBased npc);
+	public delegate void OfflineBehaviourDisabledEventHandler(TurnBased npc);
 
     private float pathDesiredDistanceOriginal = 5.0f;
+
+    public override void _Ready()
+    {
+		var turnBasedNpcManager = GetTree().GetFirstNodeInGroup("TurnBasedNPCManager") as TurnBasedNpcManager;
+		OfflineBehaviourEnabled += turnBasedNpcManager.OnNPCOfflineBehaviourEnabled;
+		OfflineBehaviourDisabled += turnBasedNpcManager.OnNPCOfflineBehaviourDisabled;
+        base._Ready();
+    }
+
 
 	public override void DisableOfflineBehaviour()
 	{
@@ -16,7 +25,7 @@ public partial class TurnBased : OutOfViewBahviour
         GetNode<NavigationAgent2D>("NavigationAgent2D").PathDesiredDistance = pathDesiredDistanceOriginal;
 		GetNode<AnimatedSprite2D>("Sprite2D").Visible = true;
 		GetNode<Weapon>("Sword").EnableVisuals();
-		EmitSignal(SignalName.OfllineBehaviourDisabled, this);
+		EmitSignal(SignalName.OfflineBehaviourDisabled, this);
 	}
 
 	public override void EnableOfflineBehaviour()
@@ -27,7 +36,13 @@ public partial class TurnBased : OutOfViewBahviour
         GetNode<NavigationAgent2D>("NavigationAgent2D").PathDesiredDistance = MaxVelocity * 0.1f;
 		GetNode<AnimatedSprite2D>("Sprite2D").Visible = false;
 		GetNode<Weapon>("Sword").DisableVisuals();
-		EmitSignal(SignalName.OfllineBehaviourEnabled, this);
+		EmitSignal(SignalName.OfflineBehaviourEnabled, this);
 	}
+
+    public override void Die()
+    {
+        base.Die();
+		DisableOfflineBehaviour();
+    }
 
 }

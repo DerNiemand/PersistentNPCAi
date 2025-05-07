@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PersitentNpcAI"
-run/main_scene="uid://d0soaavqokcc7"
+run/main_scene="uid://cpy8w2gjxdv16"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=20
 config/icon="res://Assets/icon.svg"
@@ -43,6 +43,7 @@ folder_colors={
 
 NavigationGeometry=""
 QuestManager=""
+TurnBasedNPCManager=""
 
 [input]
 

@@ -10,11 +10,13 @@ size = Vector2(6.41406, 6.42059)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jcujo"]
 radius = 50.0
 
-[node name="TurnBased" type="CharacterBody2D"]
+[node name="TurnBased" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
 collision_layer = 2
 motion_mode = 1
 platform_floor_layers = 4294901760
 script = ExtResource("1_4c5mx")
+maxVelocity = 500.0
+weapon = NodePath("Sword")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
