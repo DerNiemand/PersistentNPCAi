@@ -13,10 +13,10 @@ public partial class TurnBasedNpcManager : Node2D
 		get => updateTime <= 0;
 	}
 	List<TurnBased> offlineNPCs = new();
-	List<double> frameTimes = new();
-	List<int> deletionIndecies = new();
+	Dictionary<TurnBased, double> frameTimes = new();
+	HashSet<TurnBased> deletionNPCs = new();
 	int currentIndex = 0;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		if (!frameBasedUpdating)
@@ -25,12 +25,11 @@ public partial class TurnBasedNpcManager : Node2D
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (frameBasedUpdating)
 		{
-			UpdateNPC(delta);
+			UpdateNPC(0.166);
 		}
 	}
 
@@ -41,16 +40,15 @@ public partial class TurnBasedNpcManager : Node2D
 			return;
 		}
 		offlineNPCs.Add(npc);
-		frameTimes.Add(0.0);
+		frameTimes.Add(npc, 0.0);
 	}
 	public void OnNPCOfflineBehaviourDisabled(TurnBased npc)
 	{
 		if (offlineNPCs.Contains(npc))
 		{
-			var removeIndex = offlineNPCs.IndexOf(npc);
-			if (!deletionIndecies.Contains(removeIndex))
+			if (!deletionNPCs.Contains(npc))
 			{
-				deletionIndecies.Add(removeIndex);
+				deletionNPCs.Add(npc);
 			}
 		}
 	}
@@ -58,43 +56,40 @@ public partial class TurnBasedNpcManager : Node2D
 	public void UpdateNPC(double delta)
 	{
 		double timeSinceLastUpdate = 0;
-		if (deletionIndecies.Contains(currentIndex))
+		var updatedNPC = offlineNPCs[currentIndex];
+		if (deletionNPCs.Contains(updatedNPC))
 		{
 			var updatedIndex = currentIndex + 1 > offlineNPCs.Count - 1 ? 0 : currentIndex + 1;
-			int skippedIndecies = 1;
-			while (deletionIndecies.Contains(updatedIndex))
+			HashSet<TurnBased> deletedNPCs = [updatedNPC];
+			
+			updatedNPC = offlineNPCs[updatedIndex];
+			while (deletionNPCs.Contains(updatedNPC))
 			{
-				skippedIndecies++;
+				deletedNPCs.Add(updatedNPC);
 				updatedIndex = updatedIndex + 1 > offlineNPCs.Count - 1 ? 0 : updatedIndex + 1;
 			}
 
-			frameTimes[updatedIndex] = delta;
-			foreach (var time in frameTimes)
+			frameTimes[updatedNPC] = delta;
+			foreach (var time in frameTimes.Values)
 			{
 				timeSinceLastUpdate += time;
 			}
 
-			for(int i = 0; i < skippedIndecies;i++){
-				offlineNPCs.RemoveAt(currentIndex + i);
-				frameTimes.RemoveAt(currentIndex + i);
-				deletionIndecies.Remove(currentIndex + i);
+			foreach(var npc in deletedNPCs){
+				offlineNPCs.Remove(npc);
+				frameTimes.Remove(npc);
+				deletionNPCs.Remove(npc);
 			}
-
-			for (int i = 0; i < deletionIndecies.Count; i++)
-			{
-				deletionIndecies[i] = deletionIndecies[i] > currentIndex ? deletionIndecies[i] - skippedIndecies : deletionIndecies[i];
-			}
-			currentIndex = currentIndex >= offlineNPCs.Count - 1 ? 0 : currentIndex;
 		}
 		else
 		{
-			frameTimes[currentIndex] = delta;
-			foreach (var time in frameTimes)
+			frameTimes[updatedNPC] = delta;
+			foreach (var time in frameTimes.Values)
 			{
 				timeSinceLastUpdate += time;
 			}
 		}
-		offlineNPCs[currentIndex]._Process(timeSinceLastUpdate);
+		updatedNPC._Process(timeSinceLastUpdate);
 		currentIndex = currentIndex >= offlineNPCs.Count - 1 ? 0 : currentIndex + 1;
 	}
 

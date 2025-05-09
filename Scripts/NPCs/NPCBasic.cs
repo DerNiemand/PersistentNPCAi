@@ -96,7 +96,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 
 	public override void _Process(double delta)
 	{
-		var nextState = currentState.Process(delta);
+		var nextState = currentState.Process(0.166);
 		if (!string.IsNullOrEmpty(nextState))
 		{
 			ChangeState(nextState);

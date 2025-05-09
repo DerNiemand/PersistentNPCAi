@@ -2,7 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dubem8p67ci3f" path="res://Scripts/AutoEnd.cs" id="1_qiqb4"]
 
-[node name="AutoEnd" type="Timer"]
+[node name="AutoEnd" type="Node"]
 script = ExtResource("1_qiqb4")
-
-[connection signal="timeout" from="." to="." method="OnTimeOut"]
