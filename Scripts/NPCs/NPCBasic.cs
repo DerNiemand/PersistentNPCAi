@@ -36,7 +36,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 	}
 	private bool navTargetPositionDirty = true;
 
-	NPCState currentState;
+	protected NPCState currentState;
 
 	[Export]
 	private Weapon weapon;

@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy4bne6e3krwb"]
+
+[ext_resource type="PackedScene" uid="uid://56ssw2w8mtwn" path="res://Scenes/NPCs/quest_manager.tscn" id="1_16t6h"]
+[ext_resource type="PackedScene" uid="uid://d0soaavqokcc7" path="res://Scenes/World/world.tscn" id="2_d53fx"]
+[ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="3_5bk2r"]
+[ext_resource type="PackedScene" uid="uid://b71w0kk3ii553" path="res://Scenes/NPCs/Implementations/dont_unload.tscn" id="4_kbmb3"]
+[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="5_upixf"]
+[ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="6_7gaf1"]
+[ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="7_jaatm"]
+
+[node name="DontUnloadTest" type="Node2D"]
+
+[node name="QuestManager" parent="." node_paths=PackedStringArray("pointsOfInterestLayer") instance=ExtResource("1_16t6h")]
+pointsOfInterestLayer = NodePath("../World/PointsOfInterest")
+
+[node name="World" parent="." instance=ExtResource("2_d53fx")]
+
+[node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]
+script = ExtResource("3_5bk2r")
+NPC = ExtResource("4_kbmb3")
+amount = 1000
+spawnArea = Rect2(3, 3, 3850, 3930)
+navRegion = NodePath("../World/NavMeshes/Area0-0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1920, 1968)
+enabled = false
+zoom = Vector2(0.245, 0.245)
+
+[node name="DebugMethods" type="Node" parent="."]
+script = ExtResource("5_upixf")
+
+[node name="Player" parent="." instance=ExtResource("6_7gaf1")]
+speed = 100.0
+
+[node name="AutoEnd" parent="." instance=ExtResource("7_jaatm")]
+runFrameAmount = 3000
