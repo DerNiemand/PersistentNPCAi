@@ -61,12 +61,13 @@ public partial class TurnBasedNpcManager : Node2D
 		{
 			var updatedIndex = currentIndex + 1 > offlineNPCs.Count - 1 ? 0 : currentIndex + 1;
 			HashSet<TurnBased> deletedNPCs = [updatedNPC];
-			
+
 			updatedNPC = offlineNPCs[updatedIndex];
 			while (deletionNPCs.Contains(updatedNPC))
 			{
 				deletedNPCs.Add(updatedNPC);
 				updatedIndex = updatedIndex + 1 > offlineNPCs.Count - 1 ? 0 : updatedIndex + 1;
+				updatedNPC = offlineNPCs[updatedIndex];
 			}
 
 			frameTimes[updatedNPC] = delta;
@@ -75,7 +76,8 @@ public partial class TurnBasedNpcManager : Node2D
 				timeSinceLastUpdate += time;
 			}
 
-			foreach(var npc in deletedNPCs){
+			foreach (var npc in deletedNPCs)
+			{
 				offlineNPCs.Remove(npc);
 				frameTimes.Remove(npc);
 				deletionNPCs.Remove(npc);

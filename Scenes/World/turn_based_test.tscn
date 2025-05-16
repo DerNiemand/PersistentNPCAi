@@ -32,3 +32,4 @@ speed = 100.0
 [node name="TurnBasedNPCManager" parent="." instance=ExtResource("13_cibb5")]
 
 [node name="AutoEnd" parent="." instance=ExtResource("14_crttc")]
+runFrameAmount = 3000

@@ -248,7 +248,7 @@ public partial class NPCBasic : CharacterBody2D, PersistentNPC
 
 	public virtual void Die()
 	{
-		Position = new(-1000, -1000);
-		QueueFree();
+		var questManager = (QuestManager)GetTree().GetFirstNodeInGroup("QuestManager");
+		Position = questManager.GetNearestQuestGiverLocation(faction,Position);
 	}
 }

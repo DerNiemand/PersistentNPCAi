@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbtpmnf3cv31n"]
+[gd_scene load_steps=8 format=3 uid="uid://dbtpmnf3cv31n"]
 
 [ext_resource type="PackedScene" uid="uid://56ssw2w8mtwn" path="res://Scenes/NPCs/quest_manager.tscn" id="1_kj400"]
 [ext_resource type="PackedScene" uid="uid://d0soaavqokcc7" path="res://Scenes/World/world.tscn" id="2_38dc5"]
+[ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="7_5sfwx"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_blpid"]
 [ext_resource type="PackedScene" uid="uid://b71w0kk3ii553" path="res://Scenes/NPCs/Implementations/dont_unload.tscn" id="10_kj400"]
 [ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_bqvr1"]
@@ -31,3 +32,6 @@ script = ExtResource("11_bqvr1")
 
 [node name="Player" parent="." instance=ExtResource("12_r67xr")]
 speed = 100.0
+
+[node name="AutoEnd" parent="." instance=ExtResource("7_5sfwx")]
+runFrameAmount = 3000

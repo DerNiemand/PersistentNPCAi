@@ -42,7 +42,7 @@ public partial class TurnBased : OutOfViewBahviour
     public override void Die()
     {
         base.Die();
-		DisableOfflineBehaviour();
+		// DisableOfflineBehaviour();
     }
 
 }
