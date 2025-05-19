@@ -10,7 +10,7 @@ public partial class EventSourcing : NPCEventSourcing
     
     public void DisableOfflineBehaviour()
     {
-
+        
     }
 
     public void EnableOfflineBehaviour()
