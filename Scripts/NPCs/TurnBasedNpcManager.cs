@@ -8,7 +8,7 @@ public partial class TurnBasedNpcManager : Node2D
 	[Export]
 	Timer UpdateTimer;
 
-	bool frameBasedUpdating
+	bool FrameBasedUpdating
 	{
 		get => updateTime <= 0;
 	}
@@ -19,7 +19,7 @@ public partial class TurnBasedNpcManager : Node2D
 
 	public override void _Ready()
 	{
-		if (!frameBasedUpdating)
+		if (!FrameBasedUpdating)
 		{
 			UpdateTimer.Start(updateTime);
 		}
@@ -27,7 +27,7 @@ public partial class TurnBasedNpcManager : Node2D
 
 	public override void _Process(double delta)
 	{
-		if (frameBasedUpdating)
+		if (FrameBasedUpdating)
 		{
 			UpdateNPC(0.166);
 		}
@@ -47,8 +47,8 @@ public partial class TurnBasedNpcManager : Node2D
 		if (offlineNPCs.Contains(npc))
 		{
 			if (!deletionNPCs.Contains(npc))
-			{
-				deletionNPCs.Add(npc);
+		{
+			deletionNPCs.Add(npc);	
 			}
 		}
 	}

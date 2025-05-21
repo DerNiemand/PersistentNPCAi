@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class NPCBasic : CharacterBody2D, PersistentNPC
+public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 {
 	[Export, ExportCategory("Stats")]
 	int maxHealth = 5;

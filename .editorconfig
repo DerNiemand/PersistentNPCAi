@@ -2,3 +2,10 @@ root = true
 
 [*]
 charset = utf-8
+
+[*.cs]
+dotnet_diagnostic.CA1050.severity = none
+dotnet_diagnostic.IDE0028.severity = silent
+dotnet_diagnostic.IDE0066.severity = silent
+dotnet_diagnostic.IDE0290.severity = none
+

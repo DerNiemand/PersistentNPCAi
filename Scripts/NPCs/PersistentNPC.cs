@@ -1,5 +1,5 @@
 
-public interface PersistentNPC
+public interface IPersistentNPC
 {
     public abstract void GetNewQuest();
     public virtual void AbandonQuest()
