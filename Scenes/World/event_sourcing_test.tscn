@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dy4bne6e3krwb"]
+[gd_scene load_steps=9 format=3 uid="uid://dy4bne6e3krwb"]
 
 [ext_resource type="PackedScene" uid="uid://56ssw2w8mtwn" path="res://Scenes/NPCs/quest_manager.tscn" id="1_16t6h"]
 [ext_resource type="PackedScene" uid="uid://d0soaavqokcc7" path="res://Scenes/World/world.tscn" id="2_d53fx"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="3_5bk2r"]
-[ext_resource type="PackedScene" uid="uid://b71w0kk3ii553" path="res://Scenes/NPCs/Implementations/dont_unload.tscn" id="4_kbmb3"]
+[ext_resource type="PackedScene" uid="uid://ddfai0ew6017i" path="res://Scenes/NPCs/Implementations/event_sourcing.tscn" id="4_d53fx"]
 [ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="5_upixf"]
 [ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="6_7gaf1"]
 [ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="7_jaatm"]
+[ext_resource type="Script" uid="uid://dibybonx1yrhf" path="res://Scripts/NPCs/EventStore.cs" id="8_d53fx"]
 
-[node name="DontUnloadTest" type="Node2D"]
+[node name="EventSourcingTest" type="Node2D"]
 
 [node name="QuestManager" parent="." node_paths=PackedStringArray("pointsOfInterestLayer") instance=ExtResource("1_16t6h")]
 pointsOfInterestLayer = NodePath("../World/PointsOfInterest")
@@ -17,7 +18,7 @@ pointsOfInterestLayer = NodePath("../World/PointsOfInterest")
 
 [node name="NPCs" type="Node2D" parent="." node_paths=PackedStringArray("navRegion")]
 script = ExtResource("3_5bk2r")
-NPC = ExtResource("4_kbmb3")
+NPC = ExtResource("4_d53fx")
 amount = 1000
 spawnArea = Rect2(3, 3, 3850, 3930)
 navRegion = NodePath("../World/NavMeshes/Area0-0")
@@ -35,3 +36,6 @@ speed = 100.0
 
 [node name="AutoEnd" parent="." instance=ExtResource("7_jaatm")]
 runFrameAmount = 3000
+
+[node name="EventStore" type="Node" parent="." groups=["EventStore"]]
+script = ExtResource("8_d53fx")

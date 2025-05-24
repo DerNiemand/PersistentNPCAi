@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 public class Event
 {
     private EventType eventType;
-    private int instigatingNPC;
-    private List<int> involvedNPCs;
-    private List<int> updatedNPCs = new();
+    private Guid instigatingNPC;
+    private List<Guid> involvedNPCs;
+    private List<Guid> updatedNPCs = new();
     private bool AllNpcsUpdated
     {
         get
@@ -26,17 +27,16 @@ public class Event
 
     Dictionary<string, int> data;
 
-    public Event(EventType eventType, int instigatingNPC, List<int> involvedNPCs, List<int> updatedNPCs, Dictionary<string, int> data)
+    public Event(EventType eventType, Guid instigatingNPC, List<Guid> involvedNPCs, Dictionary<string, int> data)
     {
         this.eventType = eventType;
         this.instigatingNPC = instigatingNPC;
         this.involvedNPCs = involvedNPCs;
-        this.updatedNPCs = updatedNPCs;
         this.data = data;
     }
 
 #nullable enable
-    public bool TryGetUpdateData(int npc, out EventData? state)
+    public bool TryGetUpdateData(Guid npc, out EventData? state)
     {
         if (!AllNpcsUpdated)
         {
@@ -58,15 +58,15 @@ public class Event
 public class EventData
 {
     public readonly EventType eventType;
-    public readonly int instigatingNPC;
-    public readonly List<int> involvedNPCs;
+    public readonly Guid instigatingNPC;
+    public readonly List<Guid> involvedNPCs;
 
-    public bool IsNPCInstigating(int npc) => instigatingNPC == npc;
+    public bool IsNPCInstigating(Guid npc) => instigatingNPC == npc;
 
 
     public readonly Dictionary<string, int> data;
 
-    public EventData(EventType eventType, int instigatingNPC, List<int> involvedNPCs, Dictionary<string, int> data)
+    public EventData(EventType eventType, Guid instigatingNPC, List<Guid> involvedNPCs, Dictionary<string, int> data)
     {
         this.eventType = eventType;
         this.instigatingNPC = instigatingNPC;

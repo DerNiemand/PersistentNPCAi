@@ -64,12 +64,12 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 	}
 
 	protected List<NPCBasic> npcsInView = new();
-	List<NPCBasic> enemiesInView = new();
+	List<NPCBasic> alliesInView = new();
 	public bool EnemyIsInView
 	{
 		get
 		{
-			foreach (var enemy in enemiesInView)
+			foreach (var enemy in alliesInView)
 			{
 				viewRay.TargetPosition = ToLocal(enemy.GlobalPosition);
 				if (!viewRay.IsColliding())
@@ -161,7 +161,7 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 			npcsInView.Add(otherNPC);
 			if (FactionStats.GetRelation(faction, otherNPC.faction) == Relation.Enemies)
 			{
-				enemiesInView.Add(otherNPC);
+				alliesInView.Add(otherNPC);
 			}
 		}
 	}
@@ -174,9 +174,9 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 			{
 				npcsInView.Remove(other as NPCBasic);
 			}
-			if (enemiesInView.Contains(other as NPCBasic))
+			if (alliesInView.Contains(other as NPCBasic))
 			{
-				enemiesInView.Remove(other as NPCBasic);
+				alliesInView.Remove(other as NPCBasic);
 			}
 		}
 	}
@@ -184,11 +184,11 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 #nullable enable
 	public NPCBasic? GetNearestEnemy()
 	{
-		if (enemiesInView.Count != 0)
+		if (alliesInView.Count != 0)
 		{
-			NPCBasic closestEnemy = enemiesInView[0];
+			NPCBasic closestEnemy = alliesInView[0];
 			float closestEnemyDistanceSquared = float.MaxValue;
-			foreach (var enemy in enemiesInView)
+			foreach (var enemy in alliesInView)
 			{
 				var distanceSquaredToEnemy = GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition);
 				if (distanceSquaredToEnemy < closestEnemyDistanceSquared)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -10,7 +11,7 @@ public partial class EventStore: Node
         events.Add(events.Count, eventToAdd);
     }
 #nullable enable
-    public List<EventData> GetNewerEventsInvolvingNPC(int startIndex, int npc, out int currentIndex)
+    public List<EventData> GetNewerEventsInvolvingNPC(int startIndex, Guid npc, out int currentIndex)
     {
         List<EventData> retval = new();
         for (int i = startIndex; i < events.Count; i++)

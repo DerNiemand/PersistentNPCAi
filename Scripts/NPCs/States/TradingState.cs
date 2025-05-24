@@ -3,7 +3,6 @@ using System;
 
 public class TradingState : NPCState
 {
-    private int money;
     public override string Process(double delta)
     {
         var target = npc.GetNearestEnemy();
@@ -23,7 +22,7 @@ public class TradingState : NPCState
                 var vectorToTarget = nextPos - npc.GlobalPosition;
 
                 vectorToTarget = npc.MaxVelocity * (float)delta * vectorToTarget.Normalized();
-                
+
                 if (npc.AvoidanceEnabled)
                 {
                     npc.SetNavAgentVelocity(vectorToTarget);
@@ -41,6 +40,10 @@ public class TradingState : NPCState
 
     private void Trade()
     {
-        money++;
+        if (npc is NPCEventSourcing eventSourcingNPC)
+        {
+            eventSourcingNPC.AddMoney(2);
+            eventSourcingNPC.StartTradeCooldown();
+        }
     }
 }

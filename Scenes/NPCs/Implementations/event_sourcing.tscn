@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddfai0ew6017i"]
+
+[ext_resource type="Script" uid="uid://bxmhdv8ibuiwx" path="res://Scripts/NPCs/Implementations/EventSourcing.cs" id="1_0jy3f"]
+[ext_resource type="SpriteFrames" uid="uid://cua130x2xgbbm" path="res://Resources/NPCs/npc_independent.tres" id="2_n8sgw"]
+[ext_resource type="PackedScene" uid="uid://bb2cqg5wxepud" path="res://Scenes/NPCs/Weapons/sword.tscn" id="3_xoidt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63187"]
+size = Vector2(6.41406, 6.42059)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcujo"]
+radius = 50.0
+
+[node name="EventSourcing" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
+collision_layer = 2
+motion_mode = 1
+platform_floor_layers = 4294901760
+script = ExtResource("1_0jy3f")
+maxVelocity = 500.0
+weapon = NodePath("Sword")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 5.0
+path_max_distance = 50.0
+navigation_layers = 3
+radius = 5.0
+neighbor_distance = 20.0
+debug_enabled = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("2_n8sgw")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_63187")
+
+[node name="ViewArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_jcujo")
+debug_color = Color(0.930934, 0.229629, 0.333827, 0.42)
+
+[node name="ViewRay" type="RayCast2D" parent="."]
+
+[node name="Sword" parent="." instance=ExtResource("3_xoidt")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-50, -50, 100, 100)
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="NavigationFinished"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="TargetReached"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnSafeVelocityCalculated"]
+[connection signal="body_entered" from="ViewArea" to="." method="OnBodyEnterViewArea"]
+[connection signal="body_exited" from="ViewArea" to="." method="OnBodyExitViewArea"]
+[connection signal="NPCHit" from="Sword" to="." method="OnNPCHit"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="DisableOfflineBehaviour"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="EnableOfflineBehaviour"]
