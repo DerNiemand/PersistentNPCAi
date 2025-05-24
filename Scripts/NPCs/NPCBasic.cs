@@ -49,7 +49,7 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 	}
 
 	Area2D viewArea;
-	RayCast2D viewRay;
+	protected RayCast2D viewRay;
 	public bool AvoidanceEnabled
 	{
 		get { return navAgent.AvoidanceEnabled; }
@@ -63,7 +63,7 @@ public partial class NPCBasic : CharacterBody2D, IPersistentNPC
 		set { if (faction == Faction.Independent) { faction = value; } }
 	}
 
-	List<NPCBasic> npcsInView = new();
+	protected List<NPCBasic> npcsInView = new();
 	List<NPCBasic> enemiesInView = new();
 	public bool EnemyIsInView
 	{

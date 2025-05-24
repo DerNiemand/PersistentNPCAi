@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Godot;
 
-public class EventStore
+public partial class EventStore: Node
 {
     private Dictionary<int, Event> events = new();
 
