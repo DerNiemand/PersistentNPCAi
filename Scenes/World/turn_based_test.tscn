@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0soaavqokcc7" path="res://Scenes/World/world.tscn" id="8_yeieb"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_kp5x3"]
 [ext_resource type="PackedScene" uid="uid://croodvhgph13p" path="res://Scenes/NPCs/Implementations/turn_based.tscn" id="10_8chxj"]
-[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_q40rp"]
+[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scripts/DebugMethods.cs" id="11_q40rp"]
 [ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="12_v7tw3"]
 [ext_resource type="PackedScene" uid="uid://0khcb1qgly1q" path="res://Scenes/NPCs/Implementations/turn_based_npc_manager.tscn" id="13_cibb5"]
 [ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="14_crttc"]

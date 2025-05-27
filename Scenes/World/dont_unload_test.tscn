@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="7_5sfwx"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_blpid"]
 [ext_resource type="PackedScene" uid="uid://b71w0kk3ii553" path="res://Scenes/NPCs/Implementations/dont_unload.tscn" id="10_kj400"]
-[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_bqvr1"]
+[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scripts/DebugMethods.cs" id="11_bqvr1"]
 [ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="12_r67xr"]
 
 [node name="DontUnloadTest" type="Node2D"]

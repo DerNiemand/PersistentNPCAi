@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cat6wixawiosj" path="res://Scenes/auto_end.tscn" id="7_satcu"]
 [ext_resource type="Script" uid="uid://c3w2ne13tft7h" path="res://Scripts/NPCs/NPCSpawner.cs" id="9_u4e3o"]
 [ext_resource type="PackedScene" uid="uid://dtv7wgpljnjo3" path="res://Scenes/NPCs/Implementations/decrease_update_rate.tscn" id="10_lxhsb"]
-[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scenes/World/DebugMethods.cs" id="11_inohj"]
+[ext_resource type="Script" uid="uid://bwtxbe8dgejb5" path="res://Scripts/DebugMethods.cs" id="11_inohj"]
 [ext_resource type="PackedScene" uid="uid://bsujpt8xuxywv" path="res://Scenes/player.tscn" id="12_4obni"]
 
 [node name="DecreaseUpdateRateTest" type="Node2D"]
